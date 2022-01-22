@@ -17,8 +17,14 @@
   },
   "homepage": "https://github.com/bijuice/web-scraper#readme",
   "dependencies": {
+    "apos-to-lex-form": "^1.0.5",
     "axios": "^0.25.0",
+    "body-parser": "^1.19.1",
     "cheerio": "^1.0.0-rc.10",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "natural": "^5.1.13"
+  },
+  "devDependencies": {
+    "cors": "^2.8.5"
   }
 }
