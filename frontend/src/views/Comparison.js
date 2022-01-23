@@ -89,9 +89,7 @@ const Comparison = ({ data, setData, setShowSpinner }) => {
         {showFirst ? "Hide" : "Show All Words"}
       </button>
 
-      <h2>
-        Top <span className="success-word">100</span> Words:
-      </h2>
+      <br />
 
       <button
         className="btn"

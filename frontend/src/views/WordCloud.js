@@ -3,6 +3,7 @@ import { getData, compareSites } from "../services/scraper";
 import Spinner from "../components/Spinner";
 import UniqueWords from "./UniqueWords";
 import Comparison from "./Comparison";
+import { motion } from "framer-motion";
 
 const WordCloud = () => {
   const [url, setUrl] = useState("");
@@ -65,7 +66,7 @@ const WordCloud = () => {
   };
 
   return (
-    <div>
+    <motion.div>
       {!data && (
         <div className="flex-container-column">
           {!showCompare && (
@@ -182,7 +183,7 @@ const WordCloud = () => {
           )}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
