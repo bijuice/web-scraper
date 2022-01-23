@@ -1,28 +1,49 @@
 const express = require("express");
-const bodyParser = require("body-parser");
-const scraper = require("./services/scraper");
+const path = require("path");
+const morgan = require("morgan");
 const cors = require("cors");
-const { send } = require("express/lib/response");
+const bodyParser = require("body-parser");
+const {
+  uniqueWordsService,
+  compareWordsService,
+} = require("./services/scraper");
 
 const app = express();
+const port = process.env.PORT || 3000; // Heroku will need the PORT environment variable
+
+app.use(express.static(path.join(__dirname, "frontend/build")));
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
 
 //enable cors for dev purposes
 app.use(cors());
 
+//morgan for logging
+app.use(morgan("dev"));
+
 // create application/json parser
 var jsonParser = bodyParser.json();
 
-app.listen(3001, () => {
-  console.log("Listening on port 3001");
+app.post("/unique-words", jsonParser, async (req, res) => {
+  //gets data from service
+  try {
+    const uniqueWordData = await uniqueWordsService(req.body.url);
+    res.json(uniqueWordData);
+  } catch (e) {
+    res.send(e);
+  }
 });
 
-app.post("/unique-words", jsonParser, async (req, res) => {
+app.post("/compare", jsonParser, async (req, res) => {
   try {
-    const { uniqueWords, uniqueWordsLength } = await scraper(req.body.url);
-    res.json({
-      uniqueWords,
-      uniqueWordsLength,
-    });
+    const comparisonData = await compareWordsService(
+      req.body.firstUrl,
+      req.body.secondUrl
+    );
+
+    res.json(comparisonData);
   } catch (e) {
     res.send(e);
   }

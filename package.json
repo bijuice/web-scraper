@@ -22,6 +22,7 @@
     "body-parser": "^1.19.1",
     "cheerio": "^1.0.0-rc.10",
     "express": "^4.17.2",
+    "morgan": "^1.10.0",
     "natural": "^5.1.13"
   },
   "devDependencies": {

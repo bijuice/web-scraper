@@ -3,6 +3,7 @@ const cheerio = require("cheerio");
 const natural = require("natural");
 const { WordTokenizer } = natural;
 const aposToLexForm = require("apos-to-lex-form");
+const e = require("express");
 
 //get html data from url
 const getUrlData = async (url) => {
@@ -10,7 +11,7 @@ const getUrlData = async (url) => {
     const resData = await axios.get(url);
     return resData.data; //fetch website data
   } catch (err) {
-    console.log(err);
+    return err;
   }
 };
 
@@ -52,7 +53,8 @@ function uniqueWordCount(strArray) {
   return sorted;
 }
 
-const scraper = async (url) => {
+//analyzes one site
+const uniqueWordsService = async (url) => {
   const urlData = await getUrlData(url);
 
   const data = cheerio.load(urlData).text(); //extracts text from html
@@ -63,8 +65,43 @@ const scraper = async (url) => {
 
   return {
     uniqueWords: wordCount,
-    uniqueWordsLength: cleanedData.length,
+    uniqueWordsLength: wordCount.length,
   };
 };
 
-module.exports = scraper;
+//two site comparison function
+const compareSites = (first, second) => {
+  //remove frequency counts from each array to make comparison possible
+  const newFirst = [];
+  first.forEach((element) => newFirst.push(element[0]));
+  const newSecond = [];
+  second.forEach((element) => newSecond.push(element[0]));
+
+  //returns an array of common elements
+  const commonWords = newFirst.filter((element) => newSecond.includes(element));
+  return commonWords;
+};
+
+//compares two sites
+const compareWordsService = async (firstUrl, secondUrl) => {
+  //gets data for first url
+  const { uniqueWords: firstWords, uniqueWordsLength: firstWordsLength } =
+    await uniqueWordsService(firstUrl);
+
+  //gets data for second url
+  const { uniqueWords: secondWords, uniqueWordsLength: secondWordsLength } =
+    await uniqueWordsService(secondUrl);
+
+  const commonWords = compareSites(firstWords, secondWords); //gets comparison
+
+  return {
+    firstWords,
+    firstWordsLength,
+    secondWords,
+    secondWordsLength,
+    commonWords,
+    commonWordsLength: commonWords.length,
+  };
+};
+
+module.exports = { uniqueWordsService, compareWordsService };
