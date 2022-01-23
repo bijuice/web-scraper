@@ -23,7 +23,7 @@ const dataCleaner = (str) => {
 
   const alphaOnly = cased.replace(/[^a-zA-Z\s]+/g, ""); //removes non-alphabetical and special characters
 
-  //tokenize the string into meaningful units and returns an array of unique words
+  //tokenize the string into meaningful units and returns an array of all the words
   const tokenizer = new WordTokenizer();
   const tokenized = tokenizer.tokenize(alphaOnly);
 
