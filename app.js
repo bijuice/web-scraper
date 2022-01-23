@@ -9,8 +9,9 @@ const {
 } = require("./services/scraper");
 
 const app = express();
-const port = process.env.PORT || 3000; // Heroku will need the PORT environment variable
+const port = process.env.PORT || 3001; // Heroku will need the PORT environment variable
 
+//serves the frontend component
 app.use(express.static(path.join(__dirname, "frontend/build")));
 
 app.listen(port, () => {

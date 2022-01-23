@@ -111,28 +111,28 @@ const WordCloud = () => {
                   type="input"
                   className="form__field"
                   placeholder="Enter the url you'd like to scrape..."
-                  inputId="firstUrl"
+                  id="firstUrl"
                   name="firstUrl"
                   required
                   onChange={(event) => {
                     setFirstUrl(event.target.value);
                   }}
                 />
-                <label htmlFor="firstUrl">Enter first URL...</label>
+                <label htmlFor="firstUrl">Enter first URL</label>
 
                 <input
                   autocomplete="off"
                   type="input"
                   className="form__field"
                   placeholder="Enter the url you'd like to scrape..."
-                  inputId="secondUrl"
+                  id="secondUrl"
                   name="secondUrl"
                   required
                   onChange={(event) => {
                     setSecondUrl(event.target.value);
                   }}
                 />
-                <label htmlFor="secondUrl">Enter second URL...</label>
+                <label htmlFor="secondUrl">Enter second URL</label>
 
                 <p style={{ color: "red" }}>{error}</p>
               </div>
@@ -165,7 +165,13 @@ const WordCloud = () => {
 
       {data && (
         <div>
-          {showCompare && <Comparison />}
+          {showCompare && (
+            <Comparison
+              data={data}
+              setData={setData}
+              setShowSpinner={setShowSpinner}
+            />
+          )}
           {!showCompare && (
             <UniqueWords
               data={data}

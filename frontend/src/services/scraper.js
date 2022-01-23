@@ -1,6 +1,9 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:3001";
+//to sets url based on whether app is in dev or prod mode
+const baseUrl =
+  process.env.NODE_ENV === "development" ? "http://localhost:3001" : "";
+
 const headers = {
   "Content-Type": "application/json",
 };
