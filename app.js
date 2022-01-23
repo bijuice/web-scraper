@@ -1,7 +1,6 @@
 const express = require("express");
 const path = require("path");
 const morgan = require("morgan");
-const cors = require("cors");
 const bodyParser = require("body-parser");
 const {
   uniqueWordsService,
@@ -17,9 +16,6 @@ app.use(express.static(path.join(__dirname, "frontend/build")));
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
-
-//enable cors for dev purposes
-app.use(cors());
 
 //morgan for logging
 app.use(morgan("dev"));
