@@ -31,7 +31,13 @@ const WordCloud = () => {
       //format top 100 words for wordcloud
       const words = [];
 
-      for (let i = 0; i < 100; i++) {
+      //checks if number of words on page is less than 100
+      const max =
+        response.data.uniqueWordsLength < 100
+          ? response.data.uniqueWordsLength
+          : 100;
+
+      for (let i = 0; i < max; i++) {
         const word = {
           text: response.data.uniqueWords[i][0],
           value: response.data.uniqueWords[i][1],
