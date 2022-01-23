@@ -17,7 +17,7 @@ const WordCloud = () => {
 
   //url regex
   var urlRegex = new RegExp(
-    /[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/gi
+    /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/gi
   );
   const onButtonClick = async () => {
     //verifies that url is valid before executing request
@@ -77,7 +77,7 @@ const WordCloud = () => {
         <div className="flex-container-column">
           {!showCompare && (
             <div className="form__group field flex-container">
-              <div style={{ width: 800 }}>
+              <div style={{ width: "80vw" }}>
                 <input
                   autocomplete="off"
                   type="input"
@@ -110,7 +110,7 @@ const WordCloud = () => {
           {showCompare && (
             <div
               className="form__group field flex-container-column"
-              style={{ width: 1000 }}
+              style={{ width: "80vw" }}
             >
               <div className="flex-container-column" style={{ width: "100%" }}>
                 <input
