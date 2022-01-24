@@ -32,7 +32,7 @@ const UniqueWords = ({ data, wordCloudData, setData, setShowSpinner }) => {
       )}
 
       <h2>
-        Top <span className="success-word">100</span> Words:
+        Top <span className="success-word">{wordCloudData.length}</span> Words:
       </h2>
       <ReactWordcloud
         words={wordCloudData}
