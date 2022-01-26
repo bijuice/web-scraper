@@ -7,7 +7,9 @@ You can try out this web app using this link : https://web-scraper-arehmtulla.he
 This is a diction scraper built primarily using Node and React. The app analyzes URLs for all unique words and their frequencies. It can also compare two URLs for their common words. This data is visualized using various tools such as a word cloud.
 
 ### Backend
+
 #### Backend Packages/Technologies:
+
 - Node JS
 - express
 - cheerio
@@ -17,10 +19,12 @@ This is a diction scraper built primarily using Node and React. The app analyzes
 - morgan
 
 #### Folder Structure
+
 - app.js : main backend file
 - services/scraper.js : does all web scraping, cleaning and counting
 
-The backend of this app utilizes express to provide a REST API and serve the frontend. Within the services/scraper.js file it uses axios to make requests to each URL for web scraping and uses the cheerio package to separate the html from the text. This data then undergoes cleaning using the following steps: 
+The backend of this app utilizes express to provide a REST API and serve the frontend. Within the services/scraper.js file it uses axios to make requests to each URL for web scraping and uses the cheerio package to separate the html from the text. This data then undergoes cleaning using the following steps:
+
 1. Uses apos-to-lex-form to remove contractions in words e.g I'm becomes I am.
 2. Converts all text to lowercase.
 3. Removes non-alphabetical characters
@@ -28,15 +32,17 @@ The backend of this app utilizes express to provide a REST API and serve the fro
 
 This array is then passed through another function that counts the frequency of unique words and returns an array of arrays of the words and their frequencies. When comparing two URLs this process is run twice and an array of common words is returned. These results are then served up using a REST API.
 
-### Frontend 
+### Frontend
 
 #### Frontend Packages/Technologies:
+
 - React
 - Sass/ node-sass
 - axios
 - react-wordcloud
 
 #### Folder Structure
+
 - frontend/src/App.js : main frontend file
 - frontend/src/views : contains main views
 - frontend/src/components : contains reusable components e.g loading spinner
@@ -67,13 +73,34 @@ npm install
 ## Usage
 
 Run server:
+
 ```
 cd ./web-scraper/
 node ./app.js
 ```
+
 Navigate to localhost.
 
-### References/Credits
+#### REST API Endpoints:
+
+```
+headers =  {
+    "Content-Type" : "application/json"
+}
+
+POST /unique-words
+body = {
+    "url" : "https://en.wikipedia.org/wiki/FIFA_World_Cup"
+}
+
+POST /compare
+body = {
+    "firstUrl" : "https://en.wikipedia.org/wiki/FIFA_World_Cup",
+    "secondUrl" : "https://en.wikipedia.org/wiki/Cricket_World_Cup"
+}
+```
+
+## References/Credits
 
 - Text input styling from https://codepen.io/lucasyem/pen/ZEEYKdj
 - Spinner from https://loading.io/css/
